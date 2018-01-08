@@ -1,0 +1,23 @@
+<html>
+<body>
+<p>Press F12 and check console of browser to see results
+Ref:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp</p>
+
+<script>
+
+// Example 1 - /.y/ matches "my" and "ay", but not "yes"
+//.	(The dot, the decimal point) matches any single character except line terminators: \n, \r, \u2028 or \u2029.
+var str = 'yes make my day';
+var result = str.match(/.y/g);
+console.log(result); 
+
+// Example 2 - /.y/ matches "my" and "ay", but not "yes"
+// \d	Matches any digit (Arabic numeral). Equivalent to [0-9].
+var str = 'B2 is the suite number';
+var result = str.match(/\d/g);
+console.log(result); 
+
+</script>
+
+</body>
+</html>
