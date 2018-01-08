@@ -1,0 +1,90 @@
+<html>
+<body>
+<p>Press F12 and check console of browser to see results</p>
+
+<script>
+
+// Example 1 - split string after every 3rd space
+//\b	Find a match at the beginning/end of a word
+//	{n,m} (at least n times but no more than m times)
+var str = 'Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt';
+var splited = str.match(/\b[\w']+(?:[^\w\n]+[\w']+){0,2}\b/g);
+console.log(splited); 
+
+// Example 2 - split string after every 5th comma,
+var str = "10001,10002,10003,10004,10005,10006,10007,10008,10009,10010,10011,10012,10013,10014,10015,10016,10017"; 
+var splited = str.match(/\b[\w']+(?:[^\w\n]+[\w']+){0,4}\b/g);
+console.log(splited); 
+
+// Repeat parts of your pattern with quantifiers 
+//	? (optional)
+//	* (zero or more times)
+//	+ (one or more times)
+//	{n} (exactly n times)
+//	{n,} (at least n times)
+//  [abc]	Find any character between the brackets
+//  \d+ to match non-negative integers
+//  \s (whitespace) and \w (word characters: alphanumerics or underscore)
+//  The uppercased variants are their complements, so \S matches any non-whitespace character
+
+
+// Example 3 - b is optional here
+var str = 'abc ab ac';
+var splited = str.match(/ab?c/g);
+console.log(splited);
+
+// Example 4 - zero or more occurrences of N or n or both
+var str = 'Nick ick nick Nnick nNick NNick nnick';
+var splited = str.match(/[Nn]*ick/g);
+console.log(splited);
+
+//Grouping
+//A quantifier modifies the pattern to its immediate left.
+//Example 5 - (+) match one or more c only not full abc
+var str = '0abc0 0abcabc0 0abcc0 0abccc0';
+var splited = str.match(/0abc+0/g);
+console.log(splited);
+
+//Example 6 - grouping of abc
+var str = '0abc0 0abcabc0 0abcc0 0abccc0';
+var splited = str.match(/0(abc)+0/g);
+console.log(splited);
+
+//Alternation includes everything to its left and everything to its right
+//you could equivalently write [a-c] as a|b|c
+// Example 7 - zero or more occurrences of N or n or both
+var str = 'Nick ick nick Nnick nNick NNick nnick';
+var splited = str.match(/Nick|nick/g);
+console.log(splited);
+
+//Escaping -A backslash removes the special meaning from the following character
+// Pattern \d+ doesn't match backslash followed by lowercase D followed by a plus sign: to get that, we'd use \\d\+. 
+// Example 8 - Escaping
+var str = '\d+ d';
+var splited = str.match(/\\d\+/g); // not working
+console.log(splited);
+
+//Greediness - Regular expression quantifiers are greedy
+// Example 9 - It matches the sequence of a literal left-parenthesis, followed by one or more characters, and terminated by a right-parenthesis
+var str = '"Hello," she said, "How are you?"';
+var splited = str.match(/(.+?)/g); 
+console.log(splited);
+
+//Non-greedy quantifiers want to allow the rest of the pattern to start matching as soon as possible
+// Example 10 - escape of ()
+var str = '(123)(456)';
+var splited = str.match(/\((.+?)\)/g); 
+console.log(splited);
+
+//Anchors
+//Use the special pattern ^ to match only at the beginning of your input and $ to match only at the end
+//I know what's at the front and back, but give me everything between" is a useful technique
+// Example 11 - you want to match comments of the form
+var str = '-- This is a comment --';
+var splited = str.match(/^--\s+(.+)\s+--$/g); 
+console.log(splited);
+
+</script>
+
+</body>
+</html>
